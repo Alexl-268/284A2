@@ -58,32 +58,34 @@ public class Main {
         Scanner sc = new Scanner(System.in).useDelimiter("\\n");
         int iterations = sc.nextInt();
         System.out.print("input = ");
+        ArrayList<Integer> output = new ArrayList<Integer>();
 
-        String userinput = sc.next();
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-        int first = 0;
-        int second = 0;
-        int third = 0;
-        int count = 0;
-        ArrayList<Integer> array = new ArrayList<Integer>();
-        for (int i = 1; i < userinput.length()-1; i++){
-            if (userinput.charAt(i) == '('){
-                first = i;
+        while (iterations>0){
+            String userinput = sc.next();
+            HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+            int first = 0;
+            int second = 0;
+            int third = 0;
+            ArrayList<Integer> array = new ArrayList<Integer>();
+            for (int i = 1; i < userinput.length()-1; i++){
+                if (userinput.charAt(i) == '('){
+                    first = i;
+                }
+                if (userinput.charAt(i) == ','){
+                    second = i;
+                }
+                if (userinput.charAt(i) == ')'){
+                    third = i;
+                    int firstVal = Integer.parseInt(userinput.substring(first + 1, second));
+                    array.add(firstVal);
+                    map.put(firstVal, Integer.parseInt(userinput.substring(second+1, third)));
+                }
             }
-            if (userinput.charAt(i) == ','){
-                second = i;
-            }
-            if (userinput.charAt(i) == ')'){
-                count +=1;
-                third = i;
-                int firstVal = Integer.parseInt(userinput.substring(first + 1, second));
-                array.add(firstVal);
-                map.put(firstVal, Integer.parseInt(userinput.substring(second+1, third)));
-            }
-        }
-        System.out.println(array);
-        System.out.println(map.keySet());
-        System.out.println(map.values());
+            System.out.println(array);
+            System.out.println(map.keySet());
+            System.out.println(map.values());
 //        100 [(20,74),(95,95),(15,92),(92,38)]
+            iterations-=1;
+        }
     }
 }
