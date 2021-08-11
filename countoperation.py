@@ -48,39 +48,32 @@ scenario = input("numbers : ")
 
 def formattedArray():
 	userInput = input("input : ")
-	firstSqBracket = userInput.find("[")
-	secondSqBracket = userInput.find("]")
-	userInput = userInput[firstSqBracket+1:secondSqBracket]
-	userInput = userInput.replace("(", "")
-	userInput = userInput.replace(")", "")
-
-	return userInput
+	firstBracket = userInput.find("(")
+	dict = {}
+	while (firstBracket != -1):
+		firstBracket = userInput.find("(")
+		secondBracket = userInput.find(")")
+		sep = userInput.find(",")
+		firstNum = userInput[firstBracket+1:sep]
+		secondNum = userInput[sep+1:secondBracket]
+		dict[firstNum] = secondNum
+		userInput = userInput[secondBracket+2:]
+	return dict
 
 final = []
 scenario = int(scenario)
 while (scenario > 0):
-	userInput = formattedArray()
-	if (userInput != ""):
-		int_list = [int(x) for x in userInput.split(",")]
+	dict=formattedArray()
+	keys = list(sorted(dict.keys()))
 
-		dict = {
-		}
+	arrToCount = []
+	for i in keys :
+		arrToCount.append(dict.get(i))
 
-		for i in range(1, len(int_list), 2):
-			dict[int_list[i-1]] = int_list[i]
-
-		keys = list(sorted(dict.keys()))
-
-		arrToCount = []
-		for i in keys :
-			arrToCount.append(dict.get(i))
-
-		n= len(arrToCount)
-		temp_arr = [0]*n
-		result = _mergeSort(arrToCount, temp_arr, 0, n-1)
-		final.append(result)
-	else:
-		final.append(0)
+	n= len(arrToCount)
+	temp_arr = [0]*n
+	result = _mergeSort(arrToCount, temp_arr, 0, n-1)
+	final.append(result)
 	
 	scenario = scenario - 1
 
