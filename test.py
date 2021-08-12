@@ -9,6 +9,4 @@ while (firstBracket != -1):
     secondNum = userInput[sep+1:secondBracket]
     dict[firstNum]=secondNum
     userInput = userInput[secondBracket+2:]
-
-
-print(dict)
+return dict
