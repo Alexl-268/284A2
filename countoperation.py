@@ -1,3 +1,4 @@
+import timeit
 def _mergeSort(arr, temp_arr, left, right):
 
 	inv_count = 0
@@ -45,6 +46,7 @@ def merge(arr, temp_arr, left, mid, right):
 
 scenario = input("numbers : ")
 
+start = timeit.default_timer()
 
 def formattedArray():
 	userInput = input("input : ")
@@ -62,6 +64,8 @@ def formattedArray():
 
 final = []
 scenario = int(scenario)
+
+
 while (scenario > 0):
 	dict=formattedArray()
 	keys = list(sorted(dict.keys()))
@@ -74,8 +78,11 @@ while (scenario > 0):
 	temp_arr = [0]*n
 	result = _mergeSort(arrToCount, temp_arr, 0, n-1)
 	final.append(result)
-	
 	scenario = scenario - 1
 
 for i in final:
 	print(i)
+
+stop = timeit.default_timer()
+
+print('Time: ', (stop - start)*1000000000)

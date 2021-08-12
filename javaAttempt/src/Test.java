@@ -1,29 +1,50 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Test {
     public static void main(String[] args) {
+        System.out.print("iterations = ");
+        Scanner sc = new Scanner(System.in).useDelimiter("\\n");
+        int iterations = sc.nextInt();
+        ArrayList<Integer> output = new ArrayList<Integer>();
 
-        String[] words = {"Car", "Cat" ,"Hello", "World", "Hi", "Bye", "Dog", "Be"};
-
-        Map<Integer, ArrayList<String>> map = new HashMap<Integer, ArrayList<String>>();
-
-        for (String word: words) {
-            Integer len = word.length();
-            List<String> l = map.get(len);
-            if (l == null) {
-                l = new ArrayList<String>();
-                l.add(word);
-                map.put(len, (ArrayList<String>) l);
+        while (iterations>0){
+            String userinput = sc.next();
+            int first = 0;
+            int second = 0;
+            int third = 0;
+            ArrayList<Integer> array1 = new ArrayList<Integer>();
+            ArrayList<Integer> array2 = new ArrayList<Integer>();
+            for (int i = 1; i < userinput.length()-1; i++){
+                if (userinput.charAt(i) == '('){
+                    first = i;
+                }
+                if (userinput.charAt(i) == ','){
+                    second = i;
+                }
+                if (userinput.charAt(i) == ')'){
+                    third = i;
+                    array1.add(Integer.parseInt(userinput.substring(first + 1, second)));
+                    array2.add(Integer.parseInt(userinput.substring(second+1, third)));
+                }
             }
-            else {
-                if (! l.contains(word))
-                    l.add(word);
+            int count = 0;
+            for (int i = 0 ; i < array1.size(); i++){
+                for (int j = 0 ; j < array2.size(); j++){
+                    int val1 = array1.get(i);
+                    int val2 = array2.get(i);
+                    if (array1.get(j)>val1){
+                        if (array2.get(j)<val2){
+                            count+=1;
+                        }
+                    }
+                }
             }
+
+            output.add(count);
+            iterations-=1;
         }
-
-        System.out.println(map);
+        for (int i : output){
+            System.out.println(i);
+        }
     }
 }

@@ -2,8 +2,11 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
-public class Main {
+
+
+    public class Main {
     private static int mergeAndCount(int[] arr, int l,int m, int r)  {
         // Left subarray
         int[] left = Arrays.copyOfRange(arr, l, m + 1);
@@ -51,13 +54,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-//        int[] arr = { 1, 20, 6, 4, 5 };
-//        System.out.println(mergeSortAndCount(arr, 0, arr.length - 1));
 
         System.out.print("iterations = ");
         Scanner sc = new Scanner(System.in).useDelimiter("\\n");
         int iterations = sc.nextInt();
-        System.out.print("input = ");
+        final long startTime = System.nanoTime();
         ArrayList<Integer> output = new ArrayList<Integer>();
 
         while (iterations>0){
@@ -81,11 +82,19 @@ public class Main {
                     map.put(firstVal, Integer.parseInt(userinput.substring(second+1, third)));
                 }
             }
-            System.out.println(array);
-            System.out.println(map.keySet());
-            System.out.println(map.values());
-//        100 [(20,74),(95,95),(15,92),(92,38)]
+            Collections.sort(array);
+            int[] sorted = new  int[array.size()];
+            for (int i = 0; i < array.size() ; i++){
+                sorted[i] = map.get(array.get(i));
+            }
+            output.add(mergeSortAndCount(sorted, 0, sorted.length - 1));
             iterations-=1;
         }
+        for (int i : output){
+            System.out.println(i);
+        }
+
+        final long duration = System.nanoTime() - startTime;
+        System.out.println(duration);
     }
 }
